@@ -38,3 +38,13 @@ jest와 ts를 함께 사용할 때 위 코드를 붙여넣는 것을 잊지말�
 
 [!How To Test #1. Unit Test (feat. jest)
 ](https://devowen.com/427)
+
+## 23.01.03
+
+테스트 결과값을 비교해주는 Matcher의 기본에 대하여 공부했다.
+- toBe(): 원시 타입들을 반환할 때 사용
+- toEqual(): 원시 타입 이외의 것을 반환할 때 사용
+- toBeTruthy(), toBeFalsy(): true나 false를 반환하거나 이에 견주는 값을 반환할 때 사용
+- toHaveLength(), toContain(): 배열의 길이를 체크하거나 배열 혹은 객체 내부에 특정 원소가 존재하는지 여부를 체크할 때 사용
+- toMatch(): 주어진 문자열이 정규표현식을 통과하는지 확인할 때 사용
+- toThrow(): 예외처리를 테스트할 때 사용
