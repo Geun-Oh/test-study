@@ -143,3 +143,70 @@ test("fetch a user", async () => {
   });
 });
 ```
+
+## 23.01.26
+
+### Mocking
+
+jest 테스트를 할 때 타 라이브러리를 직접 불러올 소요 없이 해당 부분의 함수를 가짜로 제작할 수 있도록 하는 jest의 기능이다.
+
+#### jest.fn()
+
+jest는 가짜 함수를 생성할 수 있도록 `jest.fn()` 함수를 제공한다. 이 함수는 기본 함수와 동일하게 인자를 넘겨 호출할 수 있다.
+
+
+```ts
+const mockfn = jest.fn();
+
+test("test mocking function", () => {
+    expect(mockfn()).toBe(undefined);
+});
+```
+
+이와 같이 함수를 임시적으로 생성할 수 있다. 함수의 기본 반환값은 `undefined`이다.
+
+#### mockReturnValue
+
+mocking으로 생성한 함수의 반환값을 지정해줄 수 있는 메서드이다. 다음과 같이 사용한다.
+
+```ts
+const mockfn2 = jest.fn();
+mockfn2.mockReturnValue("left and right");
+
+test("test mockReturnValue", () => {
+    expect(mockfn2()).toBe("left and right");
+});
+```
+
+이와 같이 생성한 함수의 반환값을 지정해줄 수 있다.
+
+#### mockImplementation
+
+이번에는 생성한 함수를 직접 구현할 수 있는 메서드이다. 다음과 같이 사용한다.
+
+```ts
+const mockfn3 = jest.fn();
+mockfn3.mockImplementation((name) => `My name is ${name}!`);
+
+test("test mockImplementation", () => {
+    expect(mockfn3("geun")).toBe("My name is geun!");
+});
+```
+
+이와 같이 함수의 내부 로직을 직접 구현할 수 있다.
+
+#### 이외의 메서드
+
+이외에도 jest는 함수에 대한 다양한 관찰을 진행하고 있기 때문에 함수가 실행된 횟수나 특정 인자가 입력되었는지 여부 등을 확인할 수 있다.
+
+```ts
+mockfn3("annie");
+mockfn3("more");
+test("mockfn3 toBeCalledLikethis", () => {
+    expect(mockfn3).toBeCalledTimes(2);
+    expect(mockfn3).toBeCalledWith("annie");
+    expect(mockfn3).toBeCalledWith("more");
+})
+```
+
+이처럼 사용하여 함수가 코드 내에서 용도에 맞게 사용되고 있는지 확인할 수 있다.
