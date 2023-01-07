@@ -2,8 +2,6 @@
 
 ## 테스트 코드 작성에 대한 전반적인 공부를 진행해보자.
 
-## 23.01.02
-
 - Jest를 활용한 테스트의 기본에 대하여 파악했다. test => expect를 활용한 방법과 describe => it을 활용한 테스트 세분화를 알았다.
 
 - 또한 ts-jest, @types/jest 라이브러리를 활용하여 typscript 환경에서 jest 라이브러리를 사용하는 방법도 익혔다.
@@ -38,8 +36,6 @@ jest와 ts를 함께 사용할 때 위 코드를 붙여넣는 것을 잊지말�
 
 [!How To Test #1. Unit Test (feat. jest)
 ](https://devowen.com/427)
-
-## 23.01.03
 
 ### Matcher
 
@@ -144,8 +140,6 @@ test("fetch a user", async () => {
 });
 ```
 
-## 23.01.26
-
 ### Mocking
 
 jest 테스트를 할 때 타 라이브러리를 직접 불러올 소요 없이 해당 부분의 함수를 가짜로 제작할 수 있도록 하는 jest의 기능이다.
@@ -210,3 +204,84 @@ test("mockfn3 toBeCalledLikethis", () => {
 ```
 
 이처럼 사용하여 함수가 코드 내에서 용도에 맞게 사용되고 있는지 확인할 수 있다.
+
+#### spy.On()
+
+jest mocking에는 `스파이(spy)`라는 개념이 존재한다. 이는 특정 객체에 속한 함수의 구현을 가짜로 구현해내지 않고 호출 여부 및 호출 방법만을 알아낼 때 사용된다.
+
+```ts
+const calculator = {
+    hello: () => console.log("hello everyone!")
+}
+
+const spyfn = jest.spyOn(calculator, "hello")
+
+test("Let's test spyOn", () => {
+    expect(spyfn).toBeCalledTimes(1)
+})
+```
+
+위의 코드처럼 spyOn() 메서드를 사용하여 calculator 객체 내의 함수 hello을 몰래 확인하는 스파이를 붙인다. 이를 통해 해당 함수가 얼마나 호출되었고, 어떤 인자를 넘겨받았는지 알 수 있다.
+
+### 테스트 작성하기
+
+지금까지 알아본 `jest.fn()`과 `jest.spyOn()`을 통해 어떻게 테스트를 작성할 수 있을지 살펴보자.
+
+```ts
+import axios from 'axios';
+
+const URL = "https://jsonplaceholder.typicode.com";
+
+export const findOne = (id: string | number) => {
+    return axios
+    .get(`${URL}/users/${id}`)
+    .then((res) => res.data)
+}
+```
+
+우선 이처럼 간단한 API 함수를 만든다.
+
+그 다음 해당 API 함수를 테스트하는 테스트 코드를 다음과 같이 짤 수 있다.
+
+```ts
+import axios from "axios";
+import { findOne } from "../src/apiCall";
+
+test("findOne fetches data from the API endpoint", async () => {
+    const spyGet = jest.spyOn(axios, "get");
+    await findOne(1);
+    expect(spyGet).toBeCalledTimes(1);
+    expect(spyGet).toBeCalledWith(`https://jsonplaceholder.typicode.com/users/1`)
+})
+```
+
+위 처럼 간단하게 `axios` 객체 내에 `get` 메서드에 대한 정보를 훔칠 수 있다.
+
+그러나 이는 불러오는 API에 의존하는 형태이기 때문에, 다음과 같은 테스트 코드 작성 원칙에 위배된다.
+
+> 테스트가 deterministic 해야 한다(언제 실행되든 항상 같은 결과를 내야 한다)
+
+그러므로 사용하는 `axios.get`함수를 가짜로 구현하여 항상 안정적인 결과를 반환할 수 있도록 해주어야 한다.
+
+```ts
+import axios from "axios";
+import { findOne } from "../src/apiCall";
+
+test("findOne fetches data from the API endpoint", async () => {
+  axios.get = jest.fn().mockResolvedValue({
+    data: {
+      id: 1,
+      name: "geun Oh",
+    },
+  });
+
+  const spyGet = jest.spyOn(axios, "get");
+  const getData = await findOne(1);
+  expect(spyGet).toBeCalledTimes(1);
+  expect(spyGet).toBeCalledWith(`https://jsonplaceholder.typicode.com/users/1`);
+  expect(getData).toHaveProperty("id", 1);
+  expect(getData).toHaveProperty("name", "guen Oh");
+});
+```
+
+위의 코드처럼 테스트하는 입장에서 의존성이 있고 통제가 불가한 부분을 mocking을 통해 외부 환경에 의존하지 않고 얼마든지 독립적으로 테스트를 작성할 수 있다.s
