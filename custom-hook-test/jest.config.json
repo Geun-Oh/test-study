@@ -1,0 +1,7 @@
+{
+  "moduleFileExtensions": ["js", "ts", "tsx"],
+  "transform": {
+    "^.+\\.ts$": "babel-jest",
+    "^.+\\.tsx$": "babel-jest"
+  }
+}

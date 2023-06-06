@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1685867586995" clover="3.2.0">
+  <project timestamp="1685867586995" name="All files">
+    <metrics statements="13" coveredstatements="11" conditionals="3" coveredconditionals="1" methods="4" coveredmethods="3" elements="20" coveredelements="15" complexity="0" loc="13" ncloc="13" packages="2" files="4" classes="4"/>
+    <package name="hooks">
+      <metrics statements="12" coveredstatements="10" conditionals="3" coveredconditionals="1" methods="4" coveredmethods="3"/>
+      <file name="useEffectTest.ts" path="/Users/ohyeong-geun/Documents/GitHub/test-study/custom-hook-test/src/hooks/useEffectTest.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="3" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+      </file>
+      <file name="useRecoilTest.ts" path="/Users/ohyeong-geun/Documents/GitHub/test-study/custom-hook-test/src/hooks/useRecoilTest.ts">
+        <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+      </file>
+      <file name="useTest.ts" path="/Users/ohyeong-geun/Documents/GitHub/test-study/custom-hook-test/src/hooks/useTest.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="recoil">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="atom.ts" path="/Users/ohyeong-geun/Documents/GitHub/test-study/custom-hook-test/src/recoil/atom.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
