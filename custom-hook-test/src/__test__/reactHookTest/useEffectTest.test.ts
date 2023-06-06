@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
-import useEffectTest from "../hooks/useEffectTest";
+import useEffectTest from "../../hooks/useEffectTest";
 
 describe("useEffect Test", () => {
   it("초기 선언 시 props를 1로 전달하면 initialNum이 1이어야 한다.", () => {

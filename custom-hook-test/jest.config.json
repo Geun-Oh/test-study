@@ -3,5 +3,6 @@
   "transform": {
     "^.+\\.ts$": "babel-jest",
     "^.+\\.tsx$": "babel-jest"
-  }
+  },
+  "testEnvironment": "jsdom"
 }

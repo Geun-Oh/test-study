@@ -1,14 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { RecoilRoot } from "recoil";
+import Counter from "./Components/Counter";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <RecoilRoot>
         <>hello</>
+        <Counter />
       </RecoilRoot>
     </>
   );

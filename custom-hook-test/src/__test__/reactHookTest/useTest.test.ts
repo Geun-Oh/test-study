@@ -1,5 +1,5 @@
-import useTest from "../hooks/useTest";
 import { renderHook, act } from "@testing-library/react-hooks";
+import useTest from "../../hooks/useTest";
 
 test("setIsOpen을 이용해 내부 상태를 변경해줄 수 있다.", () => {
   const { result } = renderHook(() => useTest());

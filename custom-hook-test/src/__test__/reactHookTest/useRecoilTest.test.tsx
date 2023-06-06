@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { RecoilRoot } from "recoil";
-import useRecoilTest from "../hooks/useRecoilTest";
+import useRecoilTest from "../../hooks/useRecoilTest";
 import React, { ReactNode } from "react";
 
 // const Wrapper = ({ children }: { children: React.ReactNode }) => {
